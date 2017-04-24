@@ -9,7 +9,6 @@
 # Summary
 
 * What
-  * 
 
 * How
   
