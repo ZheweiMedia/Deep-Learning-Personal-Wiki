@@ -23,5 +23,6 @@
     thought as mixture likelihood of logistic. The pixel distribution of CIFAR-10 is like this:
     ![continuous](images/continuous.png)  
     And we factorize the distribution like this:
-    ![distribution](images/distribution.png)
+    ![distribution]<img src="images/distribution.png" width="50" height="50" />
+
     The authors claims that only small number of mixture components, like 5, is needed for the model.
