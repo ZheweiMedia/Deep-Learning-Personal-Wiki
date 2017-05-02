@@ -29,14 +29,14 @@
     * In pixelCNN, for each pixel we consider R/B/G squencially, which means predict R on previous pixels, predict B on previous
     pixels and R, then predict G on previous pixels and R and B. But we don't have to do these so complicated. For a sepcific pixel, 
     the relations between its sub-pixle R/G/B should be very sample. At here the authors of PixelCNN++ only use a linear model.
-    ![RGB](image/RGB.png)
+    ![RGB](images/RGB.png)
     * In original PixelCNN only use convolutions with small receptive field. And in conditional pixelCNN, it is claimed that if we use
     enough layers then we still can achieve good results. But the authors of pixelCNN++ think that long range dependencies should be better.
     To achieve this goal by using multiple resolutions, original pixelCNN and conditional pixelCNN++ implement dilated convolutions. The authors of pixelCNN++
     propose to use stride 2 convolution to reduce computatipon cost. The downside of using downsampling is it loses information. 
     So the authors introduced short-cut connections for compensation.
     * Short-cut connections like U-net. We can see it is deeper than pixelCNN.
-    ![short-cut](image/like_u-net.png)
+    ![short-cut](images/like_u-net.png)
     * Dropout. It is implement on the residual path after the first convolution.
 
 * Results
