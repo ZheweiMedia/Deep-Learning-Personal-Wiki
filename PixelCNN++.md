@@ -23,14 +23,28 @@
     thought as mixture likelihood of logistic. The pixel distribution of CIFAR-10 is like this:
     ![continuous](images/continuous.png)  
     And we factorize the distribution like this:
-    <img src="images/distribution.png" width="636" height="125" />
+    ![distribution](images/distribution.png)
 
     The authors claims that only small number of mixture components, like 5, is needed for the model.
     * In pixelCNN, for each pixel we consider R/B/G squencially, which means predict R on previous pixels, predict B on previous
-    pixels and R, then predict G on previous pixels and R and B. But we don't have to do these so ccomplicated. For a sepcific pixel, 
+    pixels and R, then predict G on previous pixels and R and B. But we don't have to do these so complicated. For a sepcific pixel, 
     the relations between its sub-pixle R/G/B should be very sample. At here the authors of PixelCNN++ only use a linear model.
+    ![RGB](image/RGB.png)
     * In original PixelCNN only use convolutions with small receptive field. And in conditional pixelCNN, it is claimed that if we use
     enough layers then we still can achieve good results. But the authors of pixelCNN++ think that long range dependencies should be better.
     To achieve this goal by using multiple resolutions, original pixelCNN and conditional pixelCNN++ implement dilated convolutions. The authors of pixelCNN++
-    propose to use downsampling to reduce computatipon cost. The downside of using downsampling is it loses information. 
+    propose to use stride 2 convolution to reduce computatipon cost. The downside of using downsampling is it loses information. 
     So the authors introduced short-cut connections for compensation.
+    * Short-cut connections like U-net. We can see it is deeper than pixelCNN.
+    ![short-cut](image/like_u-net.png)
+    * Dropout. It is implement on the residual path after the first convolution.
+
+* Results
+    * Network depth and receptive field. As long as the network has enough capacity, pixelCNN++ with small
+    receptive field also can achieve good results. But the author also admit that the image generated in this way lack
+    global structure. The authors also introduced two methods to increase network
+    capacity. One is insert gated ResNet between covolutional blocks. Second is skip connection between channels.
+    * Softmax likelihood vs. distretized logistic mixture. The former model trains more slowly.
+    * Continuous logistic likelihood vs. distretized logistic mixture. The latter model performs better in the results.
+    * No short-cut connection. Cannot even converge because of losing information in downsampling.
+    * No dropout. Obviously it overfits. And also, surprisingly, the overfitted model also cannot generate good images.
