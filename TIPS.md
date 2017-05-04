@@ -1,15 +1,10 @@
-# Paper
+# Dataset
 
-* **Title**: Mask R-CNN
-* **Authors**: Kaiming He, Georgia Gkioxari, Piotr Dollár, Ross Girshick
-* **Link**: https://arxiv.org/abs/1703.06870
-* **Tags**: Neural Network,
-* **Year**: 2017
+* **EM dataset**: Segmentation of Neuronal Structures in EM Stacks. Segmentation is about membrane and non-membrane.
+* **MR Brain dataset**: Neonatal and Adult MR Brain Image Segmentation.
 
-# Summary
+# Experiments tricks
 
-* What
+* Sub-volumes and Augmentation.
+* Bootstrapping to speed up training.
 
-* How
-  
-* Results
