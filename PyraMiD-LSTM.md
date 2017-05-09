@@ -4,7 +4,7 @@
 * **Authors**: Marijn F. Stollenga, Wonmin Byeon, Marcus Liwicki, Juergen Schmidhuber
 * **Link**: https://arxiv.org/pdf/1506.07452.pdf
 * **Tags**: Neural Network,
-* **Year**: 2017
+* **Year**: 2016
 * **Cited by**: 40
 
 # Summary
