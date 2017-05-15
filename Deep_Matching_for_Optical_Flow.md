@@ -24,5 +24,7 @@
     ![opti\_optical_flow](images/opti\_optical_flow.png)
     * Allow the network less strict in 3 pixels. Set the p(s) as 0.5, 0.2, 0.05, 0
     for the distance with the ground truth as 0, 1, 2, and more pixels.
+    * Simply ignore the pixels near the border os the image and do not 
+    use them for training.
   
 * Experiments
