@@ -18,7 +18,7 @@
 * How
     * A siamese network with two branches.
     * ![siamese](images/siamese.png)
-    * [What are Siamese neural networks](https://www.quora.com/What-are-Siamese-neural-networks-what-applications-are-they-good-for-and-why)
+    * [What are Siamese neural networks?](https://www.quora.com/What-are-Siamese-neural-networks-what-applications-are-they-good-for-and-why)
     > Siamese neural network is a class of neural network architectures that contain two or more identical subnetworks. identical here means they have the same configuration with the same parameters and weights. Parameter updating is mirrored across both subnetworks.
     * Optimization function:
     ![opti\_optical_flow](images/opti\_optical_flow.png)
