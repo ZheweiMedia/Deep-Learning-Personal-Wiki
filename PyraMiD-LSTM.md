@@ -22,7 +22,7 @@
     * Pre-processing. In this paper the authors use EM dataset and MR Brain dataset. So both them are about greyscale
     medical images. The first step is normalize each input slice as N(0,1). Then enhance the local contrast by subtruct Gaussian smoothed
     images then Contrast-Limited Adaptive Histogram Equalization (CLAHE).
-    **Image**
+    * [results](images/preprocessofpyramid.png)
     * Bootstrapping to speed up training. Doesn't like CNN, LSTM is difficult to parallelize. It ralate to the length of the
     squences. When apply LSTM on image, the sequence is very long. At here the authors use some trick to speed up training.
     So at begining they run LSTM on the block of 64\*64\*8, then 128\*128\*15, then 256\*256*20. It means in these three step, the
@@ -30,4 +30,4 @@
     needed for the original image segmentation.
     * In experiments they use three PyraMiD-LSTM layers. And use fully-connected layer to connect them. I think at here it is not
     necessary to be fully-connected.
-    **Image**
+    * [results](images/resultofpyramid.png)
