@@ -28,5 +28,5 @@ explored in previous works, such as highway neworks [25], grid LSTM [13] and neu
     * Testing for Differences in Gaussian Graphical Models: Applications to Brain Connectivity
         * **brain connectivity**
     * A Powerful Generative Model Using Random Weights for the Deep Image Representation
-        * ** Deep visulization on untrained network?**
+        * **Deep visulization on untrained network?**
         
