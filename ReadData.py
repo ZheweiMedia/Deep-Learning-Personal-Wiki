@@ -33,18 +33,18 @@ def read_data(index_list, total_data):
             imageData = subject.MRI_baseline[imageID]
             _data.append(imageData)
             if subject.DX_Group == 'AD':
-                label.append('1')
+                label.append(1)
             else:
-                label.append('0')
+                label.append(0)
         if subject.MRI_other:
             for subj in subject.MRI_other:
                 imageID = list(subj.keys())[0]
                 imageData = subj[imageID]
                 _data.append(imageData)
                 if subject.DX_Group == 'AD':
-                    label.append('1')
+                    label.append(1)
                 else:
-                    label.append('0')
+                    label.append(0)
 
     size_of_imageData = len(_data[0])
 
@@ -83,3 +83,5 @@ test_data, test_label = read_data(subjects_index[100:], subjects_list)
 
 print (train_data.shape)
 print (test_data.shape)
+
+print (sum(train_label)/len(train_label))
