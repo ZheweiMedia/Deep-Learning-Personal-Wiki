@@ -1,89 +1,118 @@
-import pickle
+import os
+from glob import glob
 import gzip
+import pickle
 import numpy
-from random import shuffle
+
+class _EachSubject:
+    # each subject is a element of a list
+    def __init__(self, SubjectID, DX_Group, MRI_imageID, fMRI_imageID):
+        self.DX_Group = DX_Group
+        self.SubjectID = SubjectID
+        # baseline 
+        self.MRI_baseline = MRI_imageID
+        self.fMRI_baseline = fMRI_imageID
+        # otherdata after baseline 
+        self.MRI_other = list()
+        self.fMRI_other = list()
+
+class _Subject_with_data:
+    def __init__(self, SubjectID, DX_Group):
+        self.DX_Group = DX_Group
+        self.SubjectID = SubjectID
+        # baseline 
+        self.MRI_baseline = dict()
+        self.fMRI_baseline = dict()
+        # otherdata after baseline 
+        self.MRI_other = list()
+        self.fMRI_other = list()
+
+"""
+os.chdir('/media/medialab/Seagate Expansion Drive/ADNI/SIEMENS/fMRI')
+fMRI_ID = list()
+for i in glob('*/'):
+    print (i)
+    print (i[5:11])
+    fMRI_ID.append(i[5:11])
+os.chdir('/home/medialab/Zhewei/fMRI_CSV_Analysis')
+with gzip.open("smallDataset_fMRIList", "wb") as output_file:
+    pickle.dump(fMRI_ID, output_file)
+"""
+
+with gzip.open("smallDataset_fMRIList", "rb") as output_file:
+    fMRI_ID = pickle.load(output_file)
+
+print (len(fMRI_ID))
+"""
+with open('fMRI_ID', 'w') as output_file:
+    for ID in fMRI_ID:
+        output_file.write(ID)
+        output_file.write('\n')
+"""
+
+with gzip.open("After_Registration_Clean_imageID.gz", "rb") as output_file:
+    subjects = pickle.load(output_file)
+
+
+for subject in subjects:
+    if subject.DX_Group == 'AD' or subject.DX_Group =='Normal':
+        #print (subject.SubjectID)
+        if subject.fMRI_baseline not in fMRI_ID:
+            #print (subject.fMRI_baseline)
+            subject.fMRI_baseline = None
+            subject.MRIBaseline = None
+        if subject.fMRI_other:
+            for ID in subject.fMRI_other:
+                if ID not in fMRI_ID:
+                    ID_index = subject.fMRI_other.index(ID)
+                    subject.fMRI_other[ID_index] = None
+                    subject.MRI_other[ID_index] = None
 
 
 
+# one bad data. cannot read the file 196079, and some images didn't process
+bad_list = ['196079', '756267', '763572', '797153']
+for subject in subjects:
+    if subject.DX_Group == 'AD' or subject.DX_Group =='Normal':
+        #print (subject.SubjectID)
+        if subject.fMRI_baseline in bad_list:
+            #print (subject.fMRI_baseline)
+            print ('YES')
+            subject.fMRI_baseline = None
+            subject.MRIBaseline = None
+        if subject.fMRI_other:
+            for ID in subject.fMRI_other:
+                if ID in bad_list:
+                    print ('YES, HERE')
+                    ID_index = subject.fMRI_other.index(ID)
+                    subject.fMRI_other[ID_index] = None
+                    subject.MRI_other[ID_index] = None
 
 
+# statistic about the data
+AD_No = 0
+Normal_No = 0
+MRI_imgNo = 0
+flag = False
+for subject in subjects:
+    if subject.DX_Group == 'AD' or subject.DX_Group =='Normal':
+        #print (subject.SubjectID)
+        flag = False
+        if subject.fMRI_baseline != None:
+            #print (subject.fMRI_baseline)
+            MRI_imgNo += 1
+            flag = True
+        if subject.fMRI_other:
+            for ID in subject.fMRI_other:
+                if ID != None:
+                    MRI_imgNo += 1
+                    flag = True
+        if flag:
+            if subject.DX_Group == 'AD':
+                AD_No += 1
+            if subject.DX_Group == 'Normal':
+                Normal_No +=1
 
-
-
-TRAIN_NO = 56
-VALID_NO = 6
-TEST_NO = 5
-BATCH_SIZE = 30
-nb_epoch = 750
-hd_notes = 10
-Groups = 2
-
-
-def normalize(_data):
-    ## _data shape: subject number, feature number, time length
-    ## the output should be (ImageNo, timesteps, featureNo)
-    output = numpy.zeros((_data.shape[0], _data.shape[2], _data.shape[1]))
-    for iNo in range(_data.shape[0]):
-        for fNo in range(_data.shape[1]):
-            _tmp = _data[iNo, fNo, :]
-            if numpy.any(_tmp):
-                _tmp = _tmp/(numpy.linalg.norm(_tmp))
-            output[iNo, :, fNo] = _tmp
-
-    return output
-
-def featureSelection(_data, _label):
-    ## _data shape: (ImageNo, timesteps, featureNo)
-    selected_feature_index = list()
-    for iNo in range(_data.shape[0]):
-        for fNo in range(_data.shape[2]):
-            _tmp = _data[iNo, :, fNo]
-            #print (numpy.corrcoef(_tmp, _label[iNo,:])[0,1])
-            #print (fNo)
-            if (numpy.corrcoef(_tmp, _label[iNo,:])[0,1] > 0.3):
-                selected_feature_index.append(fNo)
-    print(set(selected_feature_index))
-    print (len(set(selected_feature_index)))
-
-
-def label_for_keras(_label):
-    output = numpy.empty((_label.shape[0], _label.shape[1],2))
-    for iNo in range(_label.shape[0]):
-        for fNo in range(_label.shape[1]):
-            if _label[iNo, fNo] == 0:
-                output[iNo, fNo,:] = [1,0]
-            if _label[iNo, fNo] == 1:
-                output[iNo, fNo, :] = [0,1]
-    return output
-
-
-
-
-with gzip.open('EMOTION_Data.pickle.gz', 'r') as datafile:
-    original_data = pickle.load(datafile)
-
-with gzip.open('EMOTION_Label.pickle.gz', 'r') as labelfile:
-    wholeLabel = pickle.load(labelfile)
-
-# normalize
-wholeData = normalize(original_data)
-print(wholeData.shape)
-
-# featureSelection(wholeData, wholeLabel)
-
-whole_index = [i for i in range(wholeData.shape[0])]
-shuffle(whole_index)
-
-train_data = wholeData[whole_index[:TRAIN_NO],:,:]
-train_label = wholeLabel[whole_index[:TRAIN_NO],:]
-valid_data = wholeData[whole_index[TRAIN_NO:TRAIN_NO+VALID_NO],:,:]
-valid_label = wholeLabel[whole_index[TRAIN_NO:TRAIN_NO+VALID_NO],:]
-test_data = wholeData[whole_index[TRAIN_NO+VALID_NO:],:,:]
-test_label = wholeLabel[whole_index[TRAIN_NO+VALID_NO:],:]
-
-print(train_data.shape)
-print(train_label.shape)
-print(valid_data.shape)
-print(valid_label.shape)
-print(test_data.shape)
-print(test_label.shape)
+print ('We have AD subjects:', AD_No)
+print ('We have Normal subjects:', Normal_No)
+print ('We have MRI image:', MRI_imgNo)

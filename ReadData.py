@@ -59,7 +59,7 @@ def read_data(index_list, total_data):
     return _array, label
 
 
-with gzip.open("smallDataset_imageID_with_Data.gz", "rb") as output_file:
+with gzip.open("LargeDataset_imageID_with_Data.gz", "rb") as output_file:
     subjects_list = pickle.load(output_file)
 
 print (len(subjects_list))
@@ -67,19 +67,19 @@ print (len(subjects_list))
 subjects_index = [i for i in range(len(subjects_list))]
 
 
-trainNo = 100
+trainNo = 500
 testNo = 15
 
 shuffle(subjects_index)
 
 print (subjects_index)
 
-trainsubjects = subjects_index[:100]
-testsubjects = subjects_index[100:]
+trainsubjects = subjects_index[:500]
+testsubjects = subjects_index[500:]
 
 
-train_data, train_label = read_data(subjects_index[:100], subjects_list)
-test_data, test_label = read_data(subjects_index[100:], subjects_list)
+train_data, train_label = read_data(subjects_index[:500], subjects_list)
+test_data, test_label = read_data(subjects_index[500:], subjects_list)
 
 print (train_data.shape)
 print (test_data.shape)
