@@ -29,4 +29,14 @@ explored in previous works, such as highway neworks [25], grid LSTM [13] and neu
         * **brain connectivity**
     * A Powerful Generative Model Using Random Weights for the Deep Image Representation
         * **Deep visulization on untrained network?**
+    * Generating Images with Perceptual Similarity Metrics based on Deep Networks
+        * **Generation with deep learning**
+    * Dynamic Filter Networks
+        * **filers in DL**
+    * On Graph Reconstruction via Empirical Risk Minimization: Fast Learning Rates and Scalability
+        * **DL basic: Learning rate and normalization**
+    * Optimal spectral transportation with application to music transcription
+        * **Can we use it in voice?**
+    * Deep Alternative Neural Network: Exploring Contexts as Early as Possible for Action Recognition
+        * **Video, 3D. Can we learn something from it?**
         
