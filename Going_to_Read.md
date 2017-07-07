@@ -114,4 +114,6 @@ explored in previous works, such as highway neworks [25], grid LSTM [13] and neu
     * Architectural Complexity Measures of Recurrent Neural Networks
     * Variational Autoencoder for Deep Learning of Images, Labels and Captions
     * Generative Shape Models: Joint Text Recognition and Segmentation with Very Little Training Data
+    * Professor Forcing: A New Algorithm for Training Recurrent Networks
+    * Visual Dynamics: Probabilistic Future Frame Synthesis via Cross Convolutional Networks
 
