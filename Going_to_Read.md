@@ -3,8 +3,19 @@ explored in previous works, such as highway neworks [25], grid LSTM [13] and neu
 * https://arxiv.org/pdf/1702.00783.pdf. Pixel Recursive Super Resolution. This one use pixelCNN. Pixel level work.
 
 * CVPR 2017
+**Weakly supervised learning**
     * Pixelwise Instance Segmentation with a Dynamically Instantiated Network
         * **pixelwise**
+    * Video Propagation Networks
+    * Robust Interpolation of Correspondences for Large Displacement Optical Flow
+    * Deep Laplacian Pyramid Networks for Fast and Accurate Super-Resolution
+    * PointNet: Deep Learning on Point Sets for 3D Classification and Segmentation
+        * How to handle the data which are not gride.
+    * Convolutional Random Walk Networks for Semantic Image Segmentation
+    * FastMask: Segment Multi-scale Object Candidates in One Shot
+        * **Multi-scale**
+    * Interpretable Structure-Evolving LSTM
+        * **Structural data**
     
 * NIPS 2016
     * SURGE: Surface Regularized Geometry Estimation from a Single Image 
