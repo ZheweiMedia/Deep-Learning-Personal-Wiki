@@ -2,20 +2,34 @@
 explored in previous works, such as highway neworks [25], grid LSTM [13] and neural GPUs [12].
 * https://arxiv.org/pdf/1702.00783.pdf. Pixel Recursive Super Resolution. This one use pixelCNN. Pixel level work.
 
-* CVPR 2017
-**Weakly supervised learning**
-    * Pixelwise Instance Segmentation with a Dynamically Instantiated Network
-        * **pixelwise**
-    * Video Propagation Networks
+
+
+* Short List
+    * FastMask: Segment Multi-scale Object Candidates in One Shot
+        * **Multi-scale, fit to brain lesion with has large and small segmentation.**
+    * End-To-End Instance Segmentation With Recurrent Attention
+        * **What is the improve part about only detection?**
+
+
+* Small object detection/segmentation
+
+* CVPR 2017 **Weakly supervised learning**
     * Robust Interpolation of Correspondences for Large Displacement Optical Flow
-    * Deep Laplacian Pyramid Networks for Fast and Accurate Super-Resolution
     * PointNet: Deep Learning on Point Sets for 3D Classification and Segmentation
         * How to handle the data which are not gride.
     * Convolutional Random Walk Networks for Semantic Image Segmentation
+        * addresses the issues of poor boundary localization and spatially fragmented predictions
     * FastMask: Segment Multi-scale Object Candidates in One Shot
         * **Multi-scale**
     * Interpretable Structure-Evolving LSTM
         * **Structural data**
+    * SGM-Nets: Semi-Global Matching With Neural Networks
+        * **Semi-global matching**
+    * Deep Laplacian Pyramid Networks for Fast and Accurate Super-Resolution
+        * **An Simple idea**
+    * PolyNet: A Pursuit of Structural Diversity in Very Deep Networks
+        * **a new dimension beyond just depth and width**
+    * WILDCAT: Weakly Supervised Learning of Deep ConvNets for Image Classification, Pointwise Localization and Segmentation
     
 * NIPS 2016
     * SURGE: Surface Regularized Geometry Estimation from a Single Image 
